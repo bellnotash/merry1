@@ -1,0 +1,997 @@
+@font-face {
+  font-family: "mountains_of_christmasregular";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/mountainsofchristmas-webfont.woff2")
+      format("woff2"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/mountainsofchristmas-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    #8b1818 0%,
+    /* Đỏ đậm */ #a52a2a 50%,
+    /* Nâu đỏ */ #8b1818 100% /* Đỏ đậm */
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+svg {
+  width: 90%;
+  height: 90%;
+  visibility: hidden;
+}
+
+#endMessage {
+  font-family: mountains_of_christmasregular;
+  font-size: 2.3rem;
+  text-anchor: middle;
+  text-align: center;
+  fill: #ffffff;
+  color: #ffffff;
+  opacity: 0;
+  letter-spacing: 1px;
+}
+
+a {
+  color: white;
+  text-decoration: underline dotted #ffffff;
+}
+
+/* Style cho container tuyết */
+.snowfall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Style cho từng bông tuyết */
+.snowflake {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: snowFall linear infinite;
+  filter: blur(1px);
+}
+
+/* Animation cho tuyết rơi */
+@keyframes snowFall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  
+  100% {
+    transform: translateY(100vh) translateX(20px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Thêm hiệu ứng lấp lánh cho bông tuyết */
+.snowflake::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 1s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2); 
+  }
+}
+
+/* Thêm media query để tối ưu hiệu năng trên mobile */
+@media screen and (max-width: 768px) {
+  .snowflake {
+    will-change: auto;
+  }
+}
+
+/* Thêm vào style.css */
+.tree-light {
+  fill: #ffeb3b;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px gold);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px gold);
+  }
+}
+
+/* Thêm hiệu ứng ánh sáng xoay */
+.rotating-lights {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotate 10s linear infinite;
+}
+
+.light-beam {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+  transform-origin: top;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Thêm hiệu ứng lấp lánh cho các quả cầu */
+.ornament {
+  animation: sparkle 1.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes sparkle {
+  from {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  }
+}
+
+/* Thêm hiệu ứng gradient động */
+.tree-body {
+  animation: colorShift 8s infinite;
+}
+
+@keyframes colorShift {
+  0% {
+    fill: #2d5a27;
+  }
+  50% {
+    fill: #1d4d1d;
+  }
+  100% {
+    fill: #2d5a27;
+  }
+}
+
+.audio-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.audio-control:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Thêm hiệu ứng phản chiếu */
+.tree-reflection {
+  position: absolute;
+  bottom: -20%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to bottom, rgba(160, 39, 39, 0.1), transparent);
+  transform: scaleY(-1);
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+/* Hiệu ứng hạt ma thuật */
+.magic-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Cập nhật hiệu ứng cho quả cầu */
+.ornament {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  transition: all 0.3s ease;
+}
+
+.ornament:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  transform: scale(1.2);
+}
+
+/* Hiệu ứng ánh sáng xoay nâng cao */
+.rotating-lights {
+  animation: rotateHue 10s linear infinite;
+}
+
+.light-beam {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 220, 100, 0.3),
+    transparent
+  );
+}
+
+@keyframes rotateHue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Hiệu ứng phản chiếu nâng cao */
+.tree-reflection {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 220, 100, 0.05),
+    transparent
+  );
+  animation: reflectionShimmer 3s ease-in-out infinite;
+}
+
+@keyframes reflectionShimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Thêm style cho nút "Nhấn nè!" */
+.gift-button {
+  position: fixed;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 15px 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 25px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "mountains_of_christmasregular", cursive;
+}
+
+.gift-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Thêm hiệu ứng khi nhấn (active) */
+.gift-button:active {
+  transform: translateX(-50%) scale(0.95);
+  transition: all 0.1s ease;
+}
+
+/* Style cho card chúc mừng */
+.greeting-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 1000px;
+  width: 90%;
+  max-width: 400px;
+  display: none;
+  z-index: 1000;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  min-height: 400px;
+}
+
+/* Hiệu ứng lật thiệp */
+.greeting-card.open .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Style chung cho mặt trước và sau */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+
+/* Mặt trước thiệp */
+.card-front {
+  background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+  transform: rotateY(0deg);
+}
+
+.christmas-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#ff000020 2px, transparent 2px),
+    radial-gradient(#00800020 2px, transparent 2px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  opacity: 0.5;
+  border-radius: 15px;
+}
+
+.card-title {
+  position: relative;
+  margin: 20px 0;
+}
+
+.card-title h2 {
+  color: #c41e3a;
+  font-size: 32px;
+  font-family: "mountains_of_christmasregular", cursive;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.snowflakes {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  font-size: 20px;
+  animation: snowfall 3s linear infinite;
+}
+
+.card-decoration {
+  margin: 30px 0;
+  font-size: 40px;
+}
+
+.card-hint {
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Mặt sau thiệp */
+.card-back {
+  background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+  transform: rotateY(180deg);
+}
+
+.christmas-title {
+  color: #c41e3a;
+  font-size: 36px;
+  font-family: "mountains_of_christmasregular", cursive;
+  margin: 0 0 20px;
+  background: linear-gradient(45deg, #c41e3a, #ff4444);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-content {
+  color: #333;
+  line-height: 1.8;
+  margin: 30px 0;
+}
+
+.message-content p {
+  margin: 10px 0;
+}
+
+.card-decorations {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
+}
+
+/* Animations */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: #1f1c1d;
+  transform: rotate(90deg);
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .card-inner {
+    min-height: 350px;
+  }
+
+  .christmas-title {
+    font-size: 28px;
+  }
+
+  .card-title h2 {
+    font-size: 26px;
+  }
+
+  .message-content {
+    font-size: 14px;
+  }
+}
+
+/* Style cho container chứa các item treo */
+.hanging-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  z-index: 10;
+}
+
+/* Style cho từng item treo */
+.hanging-item {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  position: relative;
+  animation: swing 3s infinite ease-in-out;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  opacity: 0.9;
+}
+
+/* Thêm dây treo */
+.hanging-item::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  transform-origin: top;
+}
+
+/* Animation cho item treo */
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* Delay khác nhau cho từng item */
+.hanging-item:nth-child(2n) {
+  animation-delay: -0.5s;
+}
+
+.hanging-item:nth-child(3n) {
+  animation-delay: -1s;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .hanging-item {
+    width: 45px;
+    height: 45px;
+  }
+
+  .hanging-decoration {
+    padding: 15px;
+  }
+}
+
+/* Hover effect */
+.hanging-item:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  opacity: 1;
+}
+
+/* Style cho pattern mẫu len */
+.knit-pattern {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 880px;
+  background-image: url("images/gift-box.png");
+  opacity: 0.05;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: #c41e3a;
+  transform: rotate(90deg);
+}
+
+/* Tablet (768px and up) */
+@media screen and (min-width: 768px) {
+  .hanging-item {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gift-button {
+    padding: 15px 40px;
+    font-size: 18px;
+    bottom: 40px;
+  }
+
+  .greeting-card {
+    width: 70%;
+    padding: 25px;
+  }
+
+  .greeting-card h2 {
+    font-size: 22px;
+  }
+
+  .greeting-card p {
+    font-size: 16px;
+  }
+
+  .mainSVG {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+/* Desktop (1024px and up) */
+@media screen and (min-width: 1024px) {
+  .hanging-item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .gift-button {
+    padding: 15px 50px;
+    font-size: 20px;
+    bottom: 50px;
+  }
+
+  .greeting-card {
+    width: 400px;
+    padding: 30px;
+  }
+
+  .greeting-card h2 {
+    font-size: 24px;
+  }
+
+  .greeting-card p {
+    font-size: 18px;
+  }
+
+  .mainSVG {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+/* Large Desktop (1440px and up) */
+@media screen and (min-width: 1440px) {
+  .hanging-item {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mainSVG {
+    width: 80%;
+    height: 80%;
+    max-width: 1200px;
+  }
+}
+
+/* Landscape mode cho mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .hanging-decoration {
+    top: 10px;
+  }
+
+  .gift-button {
+    bottom: 20px;
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  .mainSVG {
+    height: 70vh;
+    width: auto;
+  }
+}
+
+/* Thêm safe-area-inset cho các thiết bị có notch */
+@supports (padding: max(0px)) {
+  .gift-button {
+    bottom: max(30px, env(safe-area-inset-bottom));
+  }
+
+  .hanging-decoration {
+    padding-top: max(20px, env(safe-area-inset-top));
+  }
+}
+
+/* Điều chỉnh style cho SVG chính */
+.mainSVG {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* Điều chỉnh responsive */
+@media screen and (max-width: 768px) {
+  .mainSVG {
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .gift-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .mainSVG {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* Điều chỉnh cho màn hình dọc */
+@media screen and (orientation: portrait) {
+  .mainSVG {
+    width: 100vw;
+    height: auto;
+  }
+}
+
+/* Điều chỉnh cho màn hình ngang */
+@media screen and (orientation: landscape) {
+  .mainSVG {
+    height: 100vh;
+    width: auto;
+  }
+}
+
+/* Thêm meta viewport vào head của HTML */
+@viewport {
+  width: device-width;
+  height: device-height;
+  initial-scale: 1;
+  maximum-scale: 1;
+  minimum-scale: 1;
+  user-scalable: no;
+}
+
+/* Điều chỉnh các icon treo */
+.hanging-decoration {
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+/* Điều chỉnh card chúc mừng */
+.greeting-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000;
+}
+/* Thêm container chính */
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+/* Điều chỉnh hiệu ứng tuyết rơi */
+.snowfall {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .greeting-card {
+    width: 85%;
+    padding: 25px 20px;
+    min-height: 250px;
+  }
+
+  .greeting-card h2 {
+    font-size: 20px;
+  }
+
+  .greeting-card p {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .greeting-card {
+    width: 80%;
+    min-height: 280px;
+  }
+}
+
+/* Landscape mode */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .greeting-card {
+    min-height: 220px;
+    padding: 20px;
+  }
+}
+
+/* Thêm các particle nền */
+.background-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hiệu ứng ánh sáng phía sau */
+.background-glow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  pointer-events: none;
+  animation: glow 8s infinite alternate;
+}
+
+/* Hiệu ứng sao lấp lánh */
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle-star var(--duration) infinite alternate;
+}
+
+/* Hiệu ứng mây trôi */
+.clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: float-cloud var(--duration) linear infinite;
+}
+
+/* Animations */
+@keyframes glow {
+  0% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes twinkle-star {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float-cloud {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+/* Thêm overlay để tạo hiệu ứng mờ và độ sâu */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 24, 24, 0.5) 0%,
+    rgba(139, 24, 24, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Điều chỉnh độ sáng cho background glow */
+.background-glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    transparent 70%
+  );
+  opacity: 0.6;
+}
+
+/* Điều chỉnh màu cho các particle */
+.particle {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
