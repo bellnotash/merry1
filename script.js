@@ -132,23 +132,33 @@ function createRotatingLights() {
 
 function addChristmasAudio() {
   const audio = new Audio();
-  audio.src = "path/to/christmas-music.mp3"; // Thêm đường dẫn nhạc Giáng sinh
+  audio.src = "music/chrismast.mp3";
   audio.loop = true;
 
-  // Thêm nút điều khiển âm thanh
+  // Tạo nút điều khiển âm thanh
   const audioControl = document.createElement("button");
-  audioControl.innerHTML = "🔊";
-  audioControl.className = "audio-control";
+  audioControl.className = "audio-control muted";
+  audioControl.innerHTML = "🔈";
 
+  // Xử lý click để bật/tắt âm thanh
   audioControl.addEventListener("click", () => {
-    if (audio.paused) {
+    if (audioControl.classList.contains("muted")) {
+      // Đang tắt -> bật lên
       audio.play();
       audioControl.innerHTML = "🔊";
+      audioControl.classList.remove("muted");
+      audioControl.classList.add("playing");
     } else {
+      // Đang bật -> tắt đi
       audio.pause();
       audioControl.innerHTML = "🔈";
+      audioControl.classList.remove("playing");
+      audioControl.classList.add("muted");
     }
   });
+
+  // Thêm tooltip
+  audioControl.title = "Click để bật/tắt nhạc";
 
   document.body.appendChild(audioControl);
 }
@@ -366,8 +376,8 @@ window.onload = function () {
   });
 };
 
-window.addEventListener('load', createEnhancedSnowfall);
-window.addEventListener('resize', createEnhancedSnowfall);
+window.addEventListener("load", createEnhancedSnowfall);
+window.addEventListener("resize", createEnhancedSnowfall);
 
 // Thêm keyframe animation cho particles
 const style = document.createElement("style");
